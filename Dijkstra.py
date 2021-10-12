@@ -68,6 +68,3 @@ def from_adjacencyList_to_adjacencyMatrix(array):
             result[i][el[0]] = el[1]
     return result
 
-# Returns a tuple containing the shortest path from node 0 to the last node n, and the length of the path.
-def dijkstra(matrix):
-    
