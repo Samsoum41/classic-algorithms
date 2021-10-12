@@ -71,10 +71,9 @@ def from_adjacencyList_to_adjacencyMatrix(array):
 # Returns a tuple containing the shortest path from node 0 to the last node n, and the length of the path.
 def dijkstra(matrix):
     n = len(matrix)
-    visited_nodes = set()
-    unvisited_nodes = {i for i in range(n)}
-    predecessors = [None for i in range(n)] 
-    distances = [-1 for i in range(n)] 
+    start_node, last_node = 0, n-1
+    unvisited_nodes, visited_nodes = {i for i in range(n)}, set()
+    predecessors, distances = [None for i in range(n)], [-1 for i in range(n)] 
     distances[0]=0
     while unvisited_nodes:
         current_node = min(list(filter(lambda node : distances[node]>=0,unvisited_nodes)), key = lambda node : distances[node])
@@ -86,11 +85,10 @@ def dijkstra(matrix):
                 predecessors[node] = current_node
         visited_nodes.add(current_node)
         unvisited_nodes.remove(current_node)
-    last_node = n-1
-    start_node = 0
-    current_node = last_node
-    path = [n-1]
-    while current_node != start_node:
-        current_node = predecessors[current_node]
-        path.insert(0, current_node)
-    return (distances[last_node], path) 
+    return (distances[last_node], pathClimber(predecessors, start_node, last_node)) 
+
+def pathClimber(predecessors, start, node):
+    if node == start:
+        return [start]
+    else: 
+        return pathClimber(predecessors, start, predecessors[node]) + [node]
