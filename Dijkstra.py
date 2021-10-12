@@ -55,3 +55,16 @@ graph2_matrix = [
     [0,0,25,12,10,0,7],
     [0,0,0,31,17,7,0],
 ]
+
+def from_adjacencyMatrix_to_adjacencyList(matrix):
+    n = len(matrix)
+    return [{(j,matrix[i][j]) for j in range(n) if matrix[i][j]>0} for i in range(n)]
+
+def from_adjacencyList_to_adjacencyMatrix(array):
+    n = len(array)
+    result =  [[0 for j in range(n)] for i in range(n)]
+    for i in range(n):
+        for el in array[i]:
+            result[i][el[0]] = el[1]
+    return result
+
